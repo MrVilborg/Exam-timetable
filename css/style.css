@@ -1,9 +1,4 @@
-body {
-  background-color: rgb(14,32,74);
-  color: rgb(192,154,93);
-  font-family: Arial, sans-serif;
-  margin: 0; padding: 20px;
-}
+body { background-color: rgb(14,32,74); color: rgb(192,154,93); font-family: Arial, sans-serif; margin: 0; padding: 20px; }
 .container { max-width: 900px; margin: auto; }
 .logo-header { display: flex; justify-content: center; gap: 30px; margin-bottom: 20px; }
 .logo-header img { max-height: 80px; }
@@ -21,8 +16,6 @@ label { display: inline-block; margin-right: 10px; }
 input[type="text"], select, input[type="file"] { width: 100%; padding: 8px; border: 1px solid rgb(0,71,142); border-radius: 4px; }
 .dual-list { display: flex; align-items: center; }
 .list-box { flex: 1; display: flex; flex-direction: column; }
-.list-box label { color: rgb(192,154,93); margin-bottom: 5px; }
-.list-box select { background: #fff; color: rgb(14,32,74); border: 1px solid rgb(0,71,142); border-radius: 4px; }
 .list-controls { display: flex; flex-direction: column; margin: 0 10px; }
 .list-controls button { margin: 5px 0; padding: 5px 10px; }
 .form-actions { margin-top: 20px; }
@@ -30,6 +23,11 @@ input[type="text"], select, input[type="file"] { width: 100%; padding: 8px; bord
 table { width: 100%; border-collapse: collapse; margin-top: 10px; }
 th, td { border: 1px solid rgb(0,71,142); padding: 8px; text-align: left; }
 th { background-color: rgb(0,71,142); color: #fff; }
-#footer { text-align: center; font-size: 0.9em; margin: 30px 0 10px; color: rgb(0,71,142); }
-#footer a { color: rgb(192,154,93); text-decoration: none; }
-#footer a:hover { text-decoration: underline; }
+/* Custom room inputs */
+#room-customisation { margin-top: 15px; }
+.room-input-row { margin-bottom: 8px; }
+.room-input-row label { display: block; color: rgb(192,154,93); margin-bottom: 4px; }
+.room-input-row input { width: 100%; padding: 6px; border: 1px solid rgb(0,71,142); border-radius: 4px; }
+footer { text-align: center; font-size: 0.9em; color: rgb(0,71,142); margin: 30px 0 10px; }
+footer a { color: rgb(192,154,93); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
