@@ -196,6 +196,13 @@ document.addEventListener('DOMContentLoaded', () => {
         tableLineColor: [14,32,74],
         tableLineWidth: 0.5
       });
+      
+      // 3) Confirmation statement
+      const confirmText = "I confirm that this timetable is accurate and reflects my official statement of entry.";
+      const confirmY = doc.lastAutoTable.finalY + 20;
+      doc.setFontSize(12).setTextColor(0, 0, 0);
+      doc.text(confirmText, 40, confirmY);
+
       // Signatures evenly spaced
       let ph = doc.internal.pageSize.getHeight();
       let ySig = ph - 60, yDate = ph - 40;
