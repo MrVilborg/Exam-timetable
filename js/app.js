@@ -18,24 +18,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const customiseRoomsChk = document.getElementById('customise-rooms');
   const roomCustomDiv = document.getElementById('room-customisation');
   const roomInputsDiv = document.getElementById('room-inputs');
-
   customiseRoomsChk.addEventListener('change', () => {
-    // Build or hide custom room inputs
     if (customiseRoomsChk.checked) {
       roomInputsDiv.innerHTML = '';
       Array.from(examSelected.options).forEach(opt => {
         const idx = opt.value;
         const r = filteredData[idx];
-        const wrapper = document.createElement('div');
-        wrapper.className = 'room-input-row';
-        const label = document.createElement('label');
-        label.textContent = r['Exam (Paper)'] + ' Room:';
-        const input = document.createElement('input');
-        input.type = 'text';
-        input.value = r['Room'];
-        input.dataset.idx = idx;
-        wrapper.append(label, input);
-        roomInputsDiv.append(wrapper);
+        const row = document.createElement('div'); row.className='room-input-row';
+        const lbl = document.createElement('label'); lbl.textContent = r['Exam (Paper)'] + ' Room:';
+        const inp = document.createElement('input'); inp.type='text'; inp.value = r['Room']; inp.dataset.idx = idx;
+        row.append(lbl, inp);
+        roomInputsDiv.append(row);
       });
       roomCustomDiv.style.display = 'block';
     } else {
@@ -153,29 +146,24 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   generateBtn.addEventListener('click', () => {
-    // Prepare room overrides if customizing
+    // Capture custom room overrides
     let roomOverrides = {};
     if (customiseRoomsChk.checked) {
-      Array.from(roomInputsDiv.querySelectorAll('input')).forEach(inp => {
-        roomOverrides[inp.dataset.idx] = inp.value.trim();
-      });
+      Array.from(roomInputsDiv.querySelectorAll('input')).forEach(i => { roomOverrides[i.dataset.idx] = i.value.trim(); });
     }
     const name = document.getElementById('student-name').value.trim();
     if (!name) { alert('Enter student name.'); return; }
     const opts = Array.from(examSelected.options);
     if (!opts.length) { alert('Select exams.'); return; }
-    let // Map selection to data and apply overrides & extra time
-      rows = opts.map(o => filteredData[o.value]);
-      rows = rows.map(r => {
-        const idx = filteredData.indexOf(r).toString();
-        const base = parseFloat(r['Length (m)']) || 0;
-        const factor = extra50Chk.checked ? 1.5 : extra25Chk.checked ? 1.25 : 1;
-        // Custom room override or sep invig or original room
-        let room = sepInvigChk.checked
-          ? (customRoomInput.value.trim() || r['Room'])
-          : (roomOverrides[idx] || r['Room']);
-        return {...r, '_length': Math.round(base * factor), '_room': room};
-      });
+    let rows = opts.map(o => filteredData[o.value]);
+    let rows = opts.map(o => filteredData[o.value]);
+    rows = rows.map(r => {
+      const idx = filteredData.indexOf(r).toString();
+      const base = parseFloat(r['Length (m)']) || 0;
+      const factor = extra50Chk.checked ? 1.5 : extra25Chk.checked ? 1.25 : 1;
+      let room = sepInvigChk.checked ? (customRoomInput.value.trim() || r['Room']) : (roomOverrides[idx] || r['Room']);
+      return {...r, '_length': Math.round(base * factor), '_room': room};
+    });
     rows = rows.map(r => {
       const base = parseFloat(r['Length (m)'])||0;
       const factor = extra50Chk.checked?1.5:extra25Chk.checked?1.25:1;
